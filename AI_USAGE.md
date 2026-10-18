@@ -19,3 +19,12 @@
 - Cung cấp bảng phân tích 5 khu vực website.
 - Đề xuất bố cục 2 cột (Desktop) và 1 cột (Mobile)
 - Cung cấp mã nguồn HTML/CSS/JS mẫu chứa đầy đủ các tính năng yêu cầu.
+
+## 5. Kiểm tra và điều chỉnh
+- Kiểm tra giao diện trên trình duyệt bằng Live Server và Chrome DevTools (chế độ Mobile).
+- Điểm tự phát hiện và điều chỉnh: Phát hiện các nút chọn màu sắc và chọn size chưa thay đổi trạng thái viền/nền khi nhấp chuột. Đã tự chỉnh sửa mã HTML/CSS và bổ sung hàm JavaScript (`selectSwatch`, `selectSize`) để cập nhật lớp `.active` tạo phản hồi thị giác mượt mà cho người dùng.
+
+## 6. Phần tôi hiểu và có thể giải thích
+- Cấu trúc các thẻ ngữ nghĩa HTML5: `<header>`, `<main>`, `<nav>`, `<article>`, `<section>`.
+- Bố cục responsive dùng `display: grid` và Media Queries `@media (min-width: 992px)`.
+- Cách dùng JavaScript lắng nghe sự kiện `onclick` để thao tác DOM (`classList.add`, `classList.remove`) nhằm quản lý trạng thái giao diện.
