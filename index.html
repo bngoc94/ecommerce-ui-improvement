@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header: Đầu trang -->
     <header class="header">
         <div class="container header__container">
             <h1 class="logo">RUBIES</h1>
-            <nav class="nav">
+            <nav class="nav" aria-label="Menu chính">
                 <a href="#" class="nav__link">Trang chủ</a>
                 <a href="#" class="nav__link">Sản phẩm</a>
                 <a href="#" class="nav__link">Giỏ hàng (0)</a>
@@ -19,43 +19,42 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Content: Nội dung chính của trang -->
     <main class="main-content">
         <div class="container">
             <!-- Breadcrumb -->
-            <nav class="breadcrumb">
+            <nav class="breadcrumb" aria-label="Thanh điều hướng vị trí">
                 <a href="#">Trang chủ</a> / <a href="#">Đầm Nữ</a> / <span>Đầm Ngắn Carti Dress</span>
             </nav>
 
-            <!-- Product Detail Wrapper -->
+            <!-- Product Detail Grid: Khung chi tiết sản phẩm 2 cột -->
             <div class="product-detail-grid">
-                
-                <!-- CỘT TRÁI: Thư viện ảnh (Gồm ảnh mẫu & Ảnh cận chất vải) -->
-                <div class="product-gallery">
+               
+                <!-- CỘT TRÁI: Thư viện ảnh sản phẩm -->
+                <section class="product-gallery" aria-label="Thư viện hình ảnh">
                     <div class="main-image-wrap">
                         <span class="badge-hot">Bán chạy #1</span>
-                        <img id="mainImage" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Đầm Ngắn Carti Dress">
+                        <img id="mainImage" src="images/Đầm Ngắn Carti Dress.webp" alt="Đầm Ngắn Carti Dress - Màu Đen">
                     </div>
                     <div class="thumbnail-list">
-                        <button class="thumb-btn active" onclick="changeImage(this, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80')">
-                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=150&q=80" alt="Thumbnail 1">
+                        <button type="button" class="thumb-btn active" onclick="changeImage(this, 'images/Đầm Ngắn Carti Dress.webp')">
+                            <img src="images/Đầm Ngắn Carti Dress.webp" alt="Đầm Ngắn Carti Dress - Màu Đen">
                         </button>
-                        <button class="thumb-btn" onclick="changeImage(this, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80')">
-                            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=150&q=80" alt="Thumbnail 2">
+                        <button type="button" class="thumb-btn" onclick="changeImage(this, 'images/Đầm Ngắn Carti Dress be.webp')">
+                            <img src="images/Đầm Ngắn Carti Dress be.webp" alt="Đầm Ngắn Carti Dress - Màu Be kem">
                         </button>
-                        <!-- Ảnh cận chất vải -->
-                        <button class="thumb-btn texture-thumb" onclick="changeImage(this, 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80')">
-                            <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=150&q=80" alt="Cận chất vải">
+                        <button type="button" class="thumb-btn texture-thumb" onclick="changeImage(this, 'images/Đầm Ngắn Carti Dress cận chất vải.webp')">
+                            <img src="images/Đầm Ngắn Carti Dress cận chất vải.webp" alt="Đầm Ngắn Carti Dress - Cận cảnh chất liệu">
                             <span class="thumb-label">Cận chất vải</span>
                         </button>
                     </div>
-                </div>
+                </section>
 
                 <!-- CỘT PHẢI: Thông tin sản phẩm & Mua hàng -->
-                <div class="product-info">
+                <section class="product-info" aria-label="Thông tin sản phẩm và mua hàng">
                     <span class="product-sku">Mã SP: RR26DN25</span>
                     <h2 class="product-title">Đầm Ngắn Carti Dress</h2>
-                    
+                   
                     <!-- Đánh giá tóm tắt -->
                     <div class="product-rating-summary">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
@@ -69,25 +68,25 @@
 
                     <hr class="divider">
 
-                    <!-- Chọn Màu sắc -->
+                    <!-- Khối chọn Màu sắc -->
                     <div class="selection-group">
-                        <label class="selection-label">Màu sắc: <strong>Đen tuyền</strong></label>
+                        <label class="selection-label">Màu sắc: <strong id="selectedColorText">Đen tuyền</strong></label>
                         <div class="color-swatches">
-                            <button class="swatch color-black active" title="Đen"></button>
-                            <button class="swatch color-beige" title="Be"></button>
+                            <button type="button" class="swatch color-black active" data-color="Đen tuyền" aria-label="Màu Đen tuyền" onclick="selectSwatch(this)"></button>
+                            <button type="button" class="swatch color-beige" data-color="Be kem" aria-label="Màu Be kem" onclick="selectSwatch(this)"></button>
                         </div>
                     </div>
 
-                    <!-- Chọn Kích thước + Bảng size -->
+                    <!-- Khối chọn Size -->
                     <div class="selection-group">
                         <div class="label-row">
                             <label class="selection-label">Kích thước (Size):</label>
                             <button type="button" class="size-chart-btn" onclick="openModal()">📐 Hướng dẫn chọn size</button>
                         </div>
                         <div class="size-swatches">
-                            <button class="size-btn active">S</button>
-                            <button class="size-btn">M</button>
-                            <button class="size-btn">L</button>
+                            <button type="button" class="size-btn active" onclick="selectSize(this)">S</button>
+                            <button type="button" class="size-btn" onclick="selectSize(this)">M</button>
+                            <button type="button" class="size-btn" onclick="selectSize(this)">L</button>
                         </div>
                     </div>
 
@@ -99,54 +98,85 @@
                     <!-- Số lượng & Nút Mua -->
                     <div class="purchase-actions">
                         <div class="quantity-selector">
-                            <button type="button" onclick="decreaseQty()">-</button>
-                            <input type="number" id="qtyInput" value="1" min="1" max="3">
-                            <button type="button" onclick="increaseQty()">+</button>
+                            <button type="button" onclick="decreaseQty()" aria-label="Giảm số lượng">-</button>
+                            <input type="number" id="qtyInput" value="1" min="1" max="3" aria-label="Số lượng mua">
+                            <button type="button" onclick="increaseQty()" aria-label="Tăng số lượng">+</button>
                         </div>
-                        <button class="btn btn-primary" onclick="alert('Đã thêm sản phẩm vào giỏ hàng thành công!')">Thêm vào giỏ hàng</button>
+                        <button type="button" class="btn btn-primary" onclick="alert('Đã thêm sản phẩm vào giỏ hàng thành công!')">Thêm vào giỏ hàng</button>
                     </div>
 
-                    <button class="btn btn-secondary">Mua ngay (Thanh toán nhanh)</button>
+                    <button type="button" class="btn btn-secondary">Mua ngay (Thanh toán nhanh)</button>
 
                     <!-- Cam kết dịch vụ -->
-                    <div class="trust-badges">
-                        <div class="badge-item">✅ Đổi trả dễ dàng trong 7 ngày</div>
-                        <div class="badge-item">🚚 Miễn phí vận chuyển đơn từ 500k</div>
-                        <div class="badge-item">🔍 Kiểm tra hàng trước khi thanh toán</div>
-                    </div>
-                </div>
+                    <ul class="trust-badges">
+                        <li class="badge-item">✅ Đổi trả dễ dàng trong 7 ngày</li>
+                        <li class="badge-item">🚚 Miễn phí vận chuyển đơn từ 500k</li>
+                        <li class="badge-item">🔍 Kiểm tra hàng trước khi thanh toán</li>
+                    </ul>
+                </section>
             </div>
 
-            <!-- KHU VỰC THÔNG TIN CHI TIẾT & ĐÁNH GIÁ -->
+            <!-- Khu vực Tab Thông tin chi tiết & Đánh giá -->
             <section class="product-details-tabs">
                 <div class="tab-headers">
-                    <button class="tab-btn active">Mô tả chi tiết & Chất liệu</button>
-                    <button class="tab-btn">Chính sách đổi trả</button>
-                    <button class="tab-btn">Đánh giá khách hàng (128)</button>
+                    <button type="button" class="tab-btn active">Mô tả chi tiết &amp; Chất liệu</button>
+                    <button type="button" class="tab-btn">Chính sách đổi trả</button>
+                    <button type="button" class="tab-btn">Đánh giá khách hàng (128)</button>
                 </div>
                 <div class="tab-content">
                     <h3>Chi tiết thiết kế</h3>
                     <p>Đầm ngắn Carti Dress thuộc bộ sưu tập mới nhất của RUBIES, sở hữu thiết kế dáng chữ A trẻ trung, tôn dáng và che khuyết điểm hoàn hảo. Chất vải tuýt-si cao cấp mềm mại, đứng form, có lớp lót bên trong tạo cảm giác thoải mái tuyệt đối khi mặc đi chơi hay dự tiệc.</p>
-                    
+                   
                     <h3 style="margin-top: 20px;">Đánh giá từ khách hàng</h3>
-                    <div class="review-card">
-                        <div class="review-header">
+                    <article class="review-card">
+                        <header class="review-header">
                             <strong>Nguyễn Thu Hà</strong>
                             <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                        </div>
+                        </header>
                         <p class="review-comment">Vất vả tìm chiếc đầm vừa vặn mà form của Rubies chuẩn quá! Vải dày dặn, đứng form y hình, shop giao hàng nhanh.</p>
-                        <span class="review-date">Đã mua Size M - Màu Đen (Ngày 12/10/2026)</span>
-                    </div>
+                        <footer class="review-footer">
+                            <span class="review-date">Đã mua Size M - Màu Đen (Ngày 12/10/2026)</span>
+                        </footer>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Khối Sản phẩm liên quan -->
+            <section class="related-products">
+                <h3 class="related-title">Sản phẩm liên quan</h3>
+                <div class="related-grid">
+                    <article class="product-card">
+                        <img src="images/Đầm Ngắn Clavi Dress.webp" alt="Đầm Ngắn Clavi Dress">
+                        <h4>Đầm Ngắn Clavi Dress</h4>
+                        <p class="price">590.000 đ</p>
+                    </article>
+                    <article class="product-card">
+                        <img src="images/Đầm Ngắn Soyo Dress.webp" alt="Đầm Ngắn Soyo Dress">
+                        <h4>Đầm Ngắn Soyo Dress</h4>
+                        <p class="price">620.000 đ</p>
+                    </article>
+                    <article class="product-card">
+                        <img src="images/Đầm Ngắn Mirika Dress.webp" alt="Đầm Ngắn Mirika Dress">
+                        <h4>Đầm Ngắn Mirika Dress</h4>
+                        <p class="price">580.000 đ</p>
+                    </article>
                 </div>
             </section>
         </div>
     </main>
 
+    <!-- Footer: Chân trang -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 RUBIES. Bài tập cá nhân - Phát triển ứng dụng Thương mại điện tử.</p>
+        </div>
+    </footer>
+
     <!-- Modal Bảng Size -->
-    <div id="sizeModal" class="modal-overlay">
+    <div id="sizeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h3>Bảng Quy Đổi Kích Cỡ Chuẩn RUBIES</h3>
+            <button type="button" class="close-modal" onclick="closeModal()" aria-label="Đóng popup">&times;</button>
+            <h3 id="modalTitle">Bảng Quy Đổi Kích Cỡ Chuẩn RUBIES</h3>
             <p>Chọn size dựa trên số đo cơ thể (cm):</p>
             <table class="size-table">
                 <thead>
@@ -166,7 +196,7 @@
         </div>
     </div>
 
-    <!-- JavaScript hỗ trợ tương tác cơ bản -->
+    <!-- JavaScript Hỗ Trợ Tương Tác -->
     <script>
         // Đổi ảnh chính khi bấm thumbnail
         function changeImage(button, src) {
@@ -195,6 +225,28 @@
         window.onclick = function(event) {
             let modal = document.getElementById('sizeModal');
             if (event.target == modal) modal.style.display = "none";
+        }
+
+        // JS Xử lý chọn Màu sắc (Đồng thời đổi ảnh chính)
+        function selectSwatch(element) {
+            document.querySelectorAll('.swatch').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            let colorName = element.getAttribute('data-color');
+            document.getElementById('selectedColorText').textContent = colorName;
+
+            let mainImage = document.getElementById('mainImage');
+            if (colorName === 'Đen tuyền') {
+                mainImage.src = 'images/Đầm Ngắn Carti Dress.webp';
+            } else if (colorName === 'Be kem') {
+                mainImage.src = 'images/Đầm Ngắn Carti Dress be.webp';
+            }
+        }
+
+        // JS Xử lý chọn Size
+        function selectSize(element) {
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
         }
     </script>
 </body>
