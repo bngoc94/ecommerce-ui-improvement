@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Online của Tôi</title>
+  <style>
+    :root {
+      --bg1: #fff0f8;
+      --bg2: #ffe7a3;
+      --pink: #ff4d94;
+      --pink-dark: #d8286b;
+      --red: #ff3b5c;
+      --purple: #7a5cff;
+      --gold: #ffd166;
+      --white: #ffffff;
+      --text: #4d2a55;
+      --shadow: rgba(115, 48, 88, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, #fff9dc 38%, #fff3ee 100%);
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px 80px;
+    }
+
+    .logo-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 26px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-badge {
+      min-width: 120px;
+      padding: 16px 22px;
+      border-radius: 22px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 1.2rem;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 10px 24px rgba(108, 72, 122, 0.18);
+      text-transform: uppercase;
+      background: linear-gradient(135deg, rgba(249,95,156,0.9), rgba(122,92,255,0.9));
+    }
+
+    .logo-badge:nth-child(2) {
+      background: linear-gradient(135deg, rgba(255,170,77,0.92), rgba(255,99,132,0.92));
+    }
+
+    .logo-badge:nth-child(3) {
+      background: linear-gradient(135deg, rgba(62,190,202,0.9), rgba(96,119,255,0.9));
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 18px 24px;
+    }
+
+    h1 {
+      margin: 0 0 15px;
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1.2;
+      color: #5a234c;
+      text-shadow: 0 3px 0 rgba(255,255,255,0.6);
+      animation: pulse 2s ease-in-out infinite alternate;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: clamp(1rem, 1.8vw, 1.5rem);
+      font-weight: 700;
+      color: #a33d7d;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .date-tag {
+      margin-top: 22px;
+      display: inline-block;
+      background: rgba(255,255,255,0.6);
+      border: 2px solid rgba(255, 77, 148, 0.35);
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #d93673;
+      box-shadow: 0 8px 18px rgba(255, 114, 170, 0.2);
+    }
+
+    .floating-layer {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bubble,
+    .heart {
+      position: absolute;
+      top: -20vh;
+      opacity: 0;
+      pointer-events: auto;
+      cursor: pointer;
+      user-select: none;
+      animation: floatDown linear forwards;
+      will-change: transform, opacity;
+    }
+
+    .bubble {
+      width: var(--size);
+      height: var(--size);
+      left: var(--left);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.6) 26%, rgba(255,94,168,0.6) 70%, rgba(122,92,255,0.7) 100%);
+      border: 2px solid rgba(255,255,255,0.55);
+      box-shadow: inset -6px -8px 15px rgba(255,255,255,0.25), 0 0 22px rgba(255, 130, 198, 0.35);
+      animation-duration: var(--duration);
+      animation-delay: var(--delay);
+    }
+
+    .heart {
+      left: var(--left);
+      font-size: var(--size);
+      color: rgba(255, 71, 107, 0.82);
+      text-shadow: 0 0 18px rgba(255, 120, 164, 0.6);
+      animation-duration: var(--duration);
+      animation-delay: var(--delay);
+    }
+
+    .bubble:active,
+    .heart:active {
+      transform: scale(1.05);
+    }
+
+    .message {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: min(90vw, 740px);
+      background: rgba(255,255,255,0.82);
+      border: 2px solid rgba(255, 103, 173, 0.5);
+      border-radius: 28px;
+      box-shadow: 0 25px 80px rgba(113, 52, 94, 0.2);
+      padding: 28px 26px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.45s ease;
+      backdrop-filter: blur(8px);
+      z-index: 3;
+    }
+
+    .message.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .message h2 {
+      margin: 0 0 12px;
+      color: #d73d77;
+      font-size: clamp(1.5rem, 2vw, 2.5rem);
+      letter-spacing: 0.03em;
+    }
+
+    .message p {
+      margin: 0;
+      font-size: clamp(1rem, 1.4vw, 1.3rem);
+      line-height: 1.8;
+      color: #5f3753;
+      font-weight: 600;
+    }
+
+    .explode {
+      animation: burst 0.7s ease-out forwards !important;
+      opacity: 1 !important;
+    }
+
+    .particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 4;
+      animation: particleMove 700ms ease-out forwards;
+    }
+
+    @keyframes floatDown {
+      0% {
+        transform: translate3d(0, -12vh, 0) scale(0.7) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(8px, 115vh, 0) scale(1.15) rotate(140deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes burst {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      30% {
+        transform: scale(1.7);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes particleMove {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.2);
+      }
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.04);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo-badge {
+        min-width: 92px;
+        font-size: 1rem;
+        letter-spacing: 1.2px;
+      }
+
+      .hero {
+        padding: 10px 14px;
+      }
+
+      .message {
+        padding: 22px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-layer" id="floatingLayer" aria-hidden="true"></div>
+
+  <div class="page">
+    <div class="logo-row" aria-label="logo UEH CTD BIT">
+      <div class="logo-badge">UEH</div>
+      <div class="logo-badge">CTD</div>
+      <div class="logo-badge">BIT</div>
+    </div>
+
+    <div class="hero">
+      <h1>Xin chào thế giới<br />TMĐT!</h1>
+      <p class="subtitle">Chúc mừng ngày phụ nữ Việt Nam</p>
+      <div class="date-tag">20/10</div>
+    </div>
+  </div>
+
+  <div class="message" id="messageBox" role="dialog" aria-live="polite">
+    <h2>20/10 – Ngày Phụ Nữ Việt Nam</h2>
+    <p>
+      Chúc các chị em luôn mạnh mẽ, xinh đẹp, hạnh phúc và thành công trong mọi bước đường.<br />
+      Yêu thương, trân trọng và biết ơn các người phụ nữ yêu quý! 💖
+    </p>
+  </div>
+
+  <script>
+    const layer = document.getElementById('floatingLayer');
+    const messageBox = document.getElementById('messageBox');
+
+    function createFallingItems() {
+      const totalHearts = 18;
+      const totalBubbles = 26;
+
+      for (let i = 0; i < totalHearts; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '♥';
+        heart.style.setProperty('--left', `${Math.random() * 100}%`);
+        heart.style.setProperty('--size', `${(Math.random() * 24 + 18).toFixed(2)}px`);
+        heart.style.setProperty('--duration', `${(Math.random() * 8 + 7).toFixed(2)}s`);
+        heart.style.setProperty('--delay', `${(Math.random() * 8).toFixed(2)}s`);
+        heart.addEventListener('click', (event) => triggerExplosion(event, heart));
+        layer.appendChild(heart);
+      }
+
+      for (let i = 0; i < totalBubbles; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.style.setProperty('--left', `${Math.random() * 100}%`);
+        bubble.style.setProperty('--size', `${(Math.random() * 26 + 12).toFixed(2)}px`);
+        bubble.style.setProperty('--duration', `${(Math.random() * 9 + 8).toFixed(2)}s`);
+        bubble.style.setProperty('--delay', `${(Math.random() * 10).toFixed(2)}s`);
+        bubble.addEventListener('click', (event) => triggerExplosion(event, bubble));
+        layer.appendChild(bubble);
+      }
+    }
+
+    function triggerExplosion(event, element) {
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      element.classList.add('explode');
+      setTimeout(() => element.remove(), 700);
+
+      for (let i = 0; i < 18; i++) {
+        const particle = document.createElement('span');
+        particle.className = 'particle';
+        particle.style.left = `${centerX}px`;
+        particle.style.top = `${centerY}px`;
+        particle.style.background = i % 2 === 0 ? '#ff5ca8' : '#ffd166';
+        particle.style.setProperty('--dx', `${(Math.random() - 0.5) * 180}px`);
+        particle.style.setProperty('--dy', `${(Math.random() - 0.5) * 180}px`);
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 700);
+      }
+
+      showMessage();
+    }
+
+    function showMessage() {
+      messageBox.classList.add('show');
+      clearTimeout(showMessage.timer);
+      showMessage.timer = setTimeout(() => {
+        messageBox.classList.remove('show');
+      }, 2600);
+    }
+
+    document.addEventListener('click', (event) => {
+      if (event.target === document.body || event.target === document.documentElement || event.target.classList.contains('page')) {
+        const burstX = event.clientX || window.innerWidth / 2;
+        const burstY = event.clientY || window.innerHeight / 2;
+
+        for (let i = 0; i < 18; i++) {
+          const particle = document.createElement('span');
+          particle.className = 'particle';
+          particle.style.left = `${burstX}px`;
+          particle.style.top = `${burstY}px`;
+          particle.style.background = i % 2 === 0 ? '#ff4d94' : '#6d8cff';
+          particle.style.setProperty('--dx', `${(Math.random() - 0.5) * 200}px`);
+          particle.style.setProperty('--dy', `${(Math.random() - 0.5) * 200}px`);
+          document.body.appendChild(particle);
+          setTimeout(() => particle.remove(), 700);
+        }
+
+        showMessage();
+      }
+    });
+
+    createFallingItems();
+  </script>
+</body>
+</html>
